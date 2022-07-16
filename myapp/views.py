@@ -8,4 +8,4 @@ def index(request):
 
 def products(request):
     products = Product.objects.all()
-    return HttpResponse(products)
+    return render(request, 'myapp/index.html')

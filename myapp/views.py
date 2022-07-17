@@ -19,4 +19,4 @@ def product_detail(request, id):
     context={
         'product':product
     }
-    return HttpResponse('The product id is: '+ str(id))
+    return render(request, 'myapp/detail.html', context)

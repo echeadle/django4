@@ -4,7 +4,7 @@
     <body>
         <h1>This is a template</h1>
         {% for product in products %}
-        <a href="{% url 'product_detail' {{product.id}} %}">
+        <a href="{% url 'myapp:product_detail' product.id %}">
           {{product.price}} -> {{product.price}} -> {{product.desc}}</br>
         </a>
         {% endfor %}

@@ -1,6 +1,9 @@
+{% load static %}
 <!DOCTYPE html>
 <html>
-    <head></head>
+    <head>
+      <link rel="stylesheet" href="{% static 'myapp/style.css' %}">
+    </head>
     <body>
         <h1>This is a template</h1>
         {% for product in products %}

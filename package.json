@@ -1,0 +1,23 @@
+{
+  "name": "django4",
+  "version": "1.0.0",
+  "description": "Started July 15 2022",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/echeadle/django4.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/echeadle/django4/issues"
+  },
+  "homepage": "https://github.com/echeadle/django4#readme",
+  "dependencies": {
+    "tailwindcss": "^2.2.16"
+  }
+}

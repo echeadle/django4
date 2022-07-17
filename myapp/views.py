@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render
 from django.http import HttpResponse
 from . models import Product
@@ -14,4 +15,8 @@ def products(request):
     return render(request, 'myapp/index.html', context)
 
 def product_detail(request, id):
+    product = Product.objects.get(id=id)
+    context={
+        'product':product
+    }
     return HttpResponse('The product id is: '+ str(id))

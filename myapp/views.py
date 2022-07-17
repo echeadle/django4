@@ -12,3 +12,6 @@ def products(request):
         'products':products
     }
     return render(request, 'myapp/index.html', context)
+
+def product_detail(request, id):
+    return HttpResponse('The product id is: '+ str(id))

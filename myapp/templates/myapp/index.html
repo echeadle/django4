@@ -1,10 +1,7 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-    <head>
-      <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
-    </head>
-    <body>
+{% extends 'myapp/base.html' %}
+{% load static%}
+{% block body %}
+
       <nav class="bg-white shadow-lg">
         <div class="max-w-6xl mx-auto px-4">
           <div  class="flex justify-between">
@@ -31,5 +28,4 @@
         </a>
         {% endfor %}
 
-    </body>
-</html>
+{% endblock %}

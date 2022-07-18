@@ -31,3 +31,6 @@ def add_product(request):
         product = Product(name=name,price=price,desc=desc,image=image)
         product.save()
     return render(request, 'myapp/addproduct.html')
+
+def update_product(request, id):
+    return render(request,'myapp/updateproduct.html')

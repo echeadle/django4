@@ -1,7 +1,9 @@
 from multiprocessing import context
 import re
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
+
+import myapp
 from . models import Product
 
 # Create your views here.
@@ -29,12 +31,20 @@ def add_product(request):
         desc = request.POST.get('desc')
         image = request.FILES['upload']
         product = Product(name=name,price=price,desc=desc,image=image)
-        product.save()
+        product.save('/myapp/products')
     return render(request, 'myapp/addproduct.html')
 
 def update_product(request, id):
     product = Product.objects.get(id=id)
+    if request.method == 'POST':
+        product.name = request.POST.get('name')
+        product.price = request.POST.get('price')
+        product.desc = request.POST.get('desc')
+        if request.FILES['upload'] != '':
+            print(product.image)
+          # redirect('/myapp/products')
+
     context = {
-        'product':product
+        'product':product,
     }
     return render(request,'myapp/updateproduct.html',context)

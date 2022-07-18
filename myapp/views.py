@@ -1,4 +1,5 @@
 from multiprocessing import context
+import re
 from django.shortcuts import render
 from django.http import HttpResponse
 from . models import Product
@@ -22,4 +23,11 @@ def product_detail(request, id):
     return render(request, 'myapp/detail.html', context)
 
 def add_product(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        price = request.POST.get('price')
+        desc = request.POST.get('desc')
+        image = request.FILES['upload']
+        product = Product(name=name,price=price,desc=desc,image=image)
+        product.save()
     return render(request, 'myapp/addproduct.html')

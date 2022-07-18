@@ -1,13 +1,12 @@
 {% extends 'myapp/base.html' %}
-{% load static%}
+{% load static %}
 {% block content %}
 
-
-      <h1>This is a template</h1>
-        {% for product in products %}
-        <a href="{% url 'myapp:product_detail' product.id %}">
-          {{product.price}} -> {{product.price}} -> {{product.desc}}</br>
-        </a>
-        {% endfor %}
+  {% for product in products %}
+    <a href="{% url 'myapp:product_detail' product.id %}">
+      {{product.name}} -> {{product.price}} -> {{product.desc}}</br>
+      <img src="{{ product.image.url }}" alt="">
+    </a>
+  {% endfor %}
 
 {% endblock %}

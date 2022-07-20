@@ -132,4 +132,4 @@ dmypy.json
 finalcode/
 node_modules/
 .vscode/*
-media/*
+#media/*

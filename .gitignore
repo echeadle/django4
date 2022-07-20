@@ -131,3 +131,4 @@ dmypy.json
 # My Additions
 finalcode/
 node_modules/
+.vscode/*

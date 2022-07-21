@@ -3,10 +3,10 @@ from django.contrib.auth.models import User
 from django import forms
 
 class NewUserForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    username = forms.CharField(required=True)
-    password1 = forms.CharField(required=True)
-    password2 = forms.CharField(required=True)
+    email = forms.EmailField(required=True,widget=forms.EmailInput(attrs={'class':'focus:outline-none', 'placeholder':'demo@gmail.com'}))
+    username =  forms.CharField(required=True, widget=forms.TextInput(attrs={'class':'focus:outline-none', 'placeholder':'user123'}))
+    password1 = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'class':'focus:outline-none'}))
+    password2 = forms.CharField(required=True,widget=forms.PasswordInput(attrs={'class':'focus:outline-none'}))
 
     class Meta:
         model = User

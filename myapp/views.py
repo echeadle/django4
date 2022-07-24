@@ -2,6 +2,8 @@ from multiprocessing import context
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
+
 # from .forms import upload_file_exists
 import myapp
 from . models import Product
@@ -24,13 +26,15 @@ def product_detail(request, id):
     }
     return render(request, 'myapp/detail.html', context)
 
+@login_required
 def add_product(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         price = request.POST.get('price')
         desc = request.POST.get('desc')
         image = request.FILES['upload']
-        product = Product(name=name,price=price,desc=desc,image=image)
+        seller_name = request.user
+        product = Product(name=name,price=price,desc=desc,image=image,seller_name=seller_name)
         product.save('/myapp/products')
     return render(request, 'myapp/addproduct.html')
 

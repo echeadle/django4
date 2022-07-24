@@ -8,7 +8,9 @@
          <div class="mt-5" >{{ product.name }}</div>
          <div class="mt-5 text-green-500" >$ {{ product.price }}</div>
          <div class="mt-5" >{{ product.desc }}</div>
-         <div class="mt-5" >Posted by: {{ product.seller_name }}</div>
+         <div class="mt-5" >
+            <a href="{% url 'users:sellerprofile' product.seller_name.id %}" >Posted by: {{ product.seller_name }}</a>
+         </div>
          <div class="mt-5" >Contact: {{ product.seller_name.profile.contact_number }}</div>
       </div>
    </div>

@@ -5,6 +5,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
 
 # from .forms import upload_file_exists
 import myapp
@@ -34,7 +35,7 @@ class ProductListView(ListView):
 #     }
 #     return render(request, 'myapp/detail.html', context)
 
-# Clas based view to replace detailed view.
+# Class based view to replace detailed view.
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'myapp/detail.html'
@@ -51,6 +52,12 @@ def add_product(request):
         product = Product(name=name,price=price,desc=desc,image=image,seller_name=seller_name)
         product.save('/myapp/products')
     return render(request, 'myapp/addproduct.html')
+
+# Class based view for creating a product.
+class ProductCreateView(CreateView):
+    model = Product
+    fields = ['name','price','desc','image','seller_name']
+    # product_form.html
 
 def update_product(request, id):
     product = Product.objects.get(id=id)

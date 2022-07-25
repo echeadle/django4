@@ -4,7 +4,7 @@ from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # from .forms import upload_file_exists
 import myapp
@@ -27,12 +27,18 @@ class ProductListView(ListView):
     template_name = 'myapp/index.html'
     context_object_name = 'products'
 
-def product_detail(request, id):
-    product = Product.objects.get(id=id)
-    context={
-        'product':product
-    }
-    return render(request, 'myapp/detail.html', context)
+# def product_detail(request, id):
+#     product = Product.objects.get(id=id)
+#     context={
+#         'product':product
+#     }
+#     return render(request, 'myapp/detail.html', context)
+
+# Clas based view to replace detailed view.
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'myapp/detail.html'
+    context_object_name = 'product'
 
 @login_required
 def add_product(request):

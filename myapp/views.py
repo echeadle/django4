@@ -1,4 +1,5 @@
 from multiprocessing import context
+from ssl import SSL_ERROR_INVALID_ERROR_CODE
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
@@ -64,3 +65,10 @@ def delete_product(request,id):
         product.delete()
         return redirect('/myapp/products')
     return render(request, 'myapp/delete.html',context)
+
+def my_listings(request):
+    products = Product.objects.filter(seller_name=request.user)
+    context = {
+        'products':products,
+    }
+    return render(request,'myapp/mylistings.html',context)

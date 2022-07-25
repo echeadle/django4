@@ -4,6 +4,7 @@ from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.generic import ListView
 
 # from .forms import upload_file_exists
 import myapp
@@ -13,12 +14,18 @@ from . models import Product
 def index(request):
     return HttpResponse("Hello World")
 
-def products(request):
-    products = Product.objects.all()
-    context = {
-        'products':products
-    }
-    return render(request, 'myapp/index.html', context)
+# def products(request):
+#     products = Product.objects.all()
+#     context = {
+#         'products':products
+#     }
+#     return render(request, 'myapp/index.html', context)
+
+# Class based view to replace products function 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'myapp/index.html'
+    context_object_name = 'products'
 
 def product_detail(request, id):
     product = Product.objects.get(id=id)

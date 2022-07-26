@@ -16,7 +16,7 @@ class ProductAdmin(admin.ModelAdmin):
         queryset.update(price=0)
     
     actions =('set_price_to_zero',)
-    
+    list_editable = ('price','desc')
 
 admin.site.register(Product,ProductAdmin)
 

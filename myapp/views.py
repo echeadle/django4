@@ -5,7 +5,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView,UpdateView 
 
 # from .forms import upload_file_exists
 import myapp
@@ -59,22 +59,26 @@ class ProductCreateView(CreateView):
     fields = ['name','price','desc','image','seller_name']
     # product_form.html
 
-def update_product(request, id):
-    product = Product.objects.get(id=id)
-    image = product.image
-    if request.method == 'POST':
-        product.name = request.POST.get('name')
-        product.price = request.POST.get('price')
-        product.desc = request.POST.get('desc')
-        product.image = request.FILES['upload']
-        product.save()
-        return redirect('/myapp/products')
+# def update_product(request, id):
+#     product = Product.objects.get(id=id)
+#     image = product.image
+#     if request.method == 'POST':
+#         product.name = request.POST.get('name')
+#         product.price = request.POST.get('price')
+#         product.desc = request.POST.get('desc')
+#         product.image = request.FILES['upload']
+#         product.save()
+#         return redirect('/myapp/products')
 
-    context = {
-        'product':product,
-    }
-    return render(request,'myapp/updateproduct.html',context)
+#     context = {
+#         'product':product,
+#     }
+#     return render(request,'myapp/updateproduct.html',context)
 
+class ProductUpdateView(UpdateView):
+    model = Product
+    fields = ['name','price','desc','image','seller_name']
+    template_name_suffix = '_update_form'
 
 def delete_product(request,id):
     product = Product.objects.get(id=id)

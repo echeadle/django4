@@ -1,3 +1,4 @@
+from audioop import reverse
 from multiprocessing import context
 from ssl import SSL_ERROR_INVALID_ERROR_CODE
 from urllib import request
@@ -5,7 +6,8 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView,UpdateView 
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.urls import reverse_lazy
 
 # from .forms import upload_file_exists
 import myapp
@@ -89,6 +91,11 @@ def delete_product(request,id):
         product.delete()
         return redirect('/myapp/products')
     return render(request, 'myapp/delete.html',context)
+
+# Create Class based delete view
+class ProductDelete(DeleteView):
+    model = Product
+    success_url = reverse_lazy('myapp:products')
 
 def my_listings(request):
     products = Product.objects.filter(seller_name=request.user)

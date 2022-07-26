@@ -34,4 +34,22 @@
     </a>
   {% endfor %}
   </div>
+  <!--pagination code starts here-->
+  <div class="pagination">
+    <span>
+      {% if page_obj.has_previous %}
+        <a href="">First</a>
+        <a href="">Previous</a>
+      {% endif %}
+      <span>
+        Page {{page_obj.number}} of {{page_obj.paginator.num_pages}}
+      </span>
+      <span>
+        {% if page_obj.has_next %}
+          <a href="">Next</a>
+          <a href="">Last</a>
+        {% endif %}
+    </span>
+  </div>
+  <!--pagination code ends here-->
 {% endblock %}

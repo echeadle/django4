@@ -17,6 +17,13 @@
       <h2 class="text-3xl font-normal mt-0 mb-2 text-gray-500" >Recent Products</h2>
     </div>
 
+  <div class="mt-5 p-10 justify center">
+    <h2>Search Products</h2>
+    <form method="GET">
+      <input class="font-bold text-lg text-gray-700" name="product_name" id="product_name" placeholder="Type a product to search" type="text">
+    </form>
+  </div>
+
   <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-3 lg:grid-cols-3 gap-5">
     <!--Card 1-->
    {% for product in page_obj %}

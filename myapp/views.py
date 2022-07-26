@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 # from .forms import upload_file_exists
 import myapp
@@ -17,19 +18,22 @@ from . models import Product
 def index(request):
     return HttpResponse("Hello World")
 
-# def products(request):
-#     products = Product.objects.all()
-#     context = {
-#         'products':products
-#     }
-#     return render(request, 'myapp/index.html', context)
+def products(request):
+    products = Product.objects.all()
+    paginator = Paginator(products,3)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        'page_obj':page_obj
+    }
+    return render(request, 'myapp/index.html', context)
 
 # Class based view to replace products function 
-class ProductListView(ListView):
-    model = Product
-    template_name = 'myapp/index.html'
-    context_object_name = 'products'
-    paginate_by = 3
+# class ProductListView(ListView):
+#     model = Product
+#     template_name = 'myapp/index.html'
+#     context_object_name = 'products'
+#     paginate_by = 3
 
 # def product_detail(request, id):
 #     product = Product.objects.get(id=id)
@@ -62,21 +66,21 @@ class ProductCreateView(CreateView):
     fields = ['name','price','desc','image','seller_name']
     # product_form.html
 
-# def update_product(request, id):
-#     product = Product.objects.get(id=id)
-#     image = product.image
-#     if request.method == 'POST':
-#         product.name = request.POST.get('name')
-#         product.price = request.POST.get('price')
-#         product.desc = request.POST.get('desc')
-#         product.image = request.FILES['upload']
-#         product.save()
-#         return redirect('/myapp/products')
+def update_product(request, id):
+    product = Product.objects.get(id=id)
+    image = product.image
+    if request.method == 'POST':
+        product.name = request.POST.get('name')
+        product.price = request.POST.get('price')
+        product.desc = request.POST.get('desc')
+        product.image = request.FILES['upload']
+        product.save()
+        return redirect('/myapp/products')
 
-#     context = {
-#         'product':product,
-#     }
-#     return render(request,'myapp/updateproduct.html',context)
+    context = {
+        'product':product,
+    }
+    return render(request,'myapp/updateproduct.html',context)
 
 class ProductUpdateView(UpdateView):
     model = Product

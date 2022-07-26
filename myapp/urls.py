@@ -21,7 +21,10 @@ app_name = 'myapp'
 
 urlpatterns = [
     path('',views.index),
-    path('products/', views.ProductListView.as_view(), name='products'),
+    # Class based view
+    # path('products/', views.ProductListView.as_view(), name='products'),
+    # Function based view 
+    path('products/', views.products, name='products'),
     path('products/<int:pk>/',views.ProductDetailView.as_view(),name='product_detail'),
     path('products/add/', views.ProductCreateView.as_view(),name='add_product'),
     path('products/update/<int:pk>', views.ProductUpdateView.as_view(),name='update_product'),

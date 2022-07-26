@@ -12,6 +12,12 @@ class ProductAdmin(admin.ModelAdmin):
     list_display= ('name','price','desc')
     search_fields = ('name',)
 
+    def set_price_to_zero(self,request,queryset):
+        queryset.update(price=0)
+    
+    actions =('set_price_to_zero',)
+    
+
 admin.site.register(Product,ProductAdmin)
 
 

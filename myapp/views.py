@@ -7,12 +7,17 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
-from django.urls import reverse_lazy
+from django.urls import reverse,reverse_lazy
 from django.core.paginator import Paginator
+
+from django.http.response import HttpResponseNotFound, JsonResponse
+from django.shortcuts import get_object_or_404
 
 # from .forms import upload_file_exists
 import myapp
 from . models import Product
+from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
